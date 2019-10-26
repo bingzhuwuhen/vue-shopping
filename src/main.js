@@ -22,20 +22,20 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 //设置请求的根路径
 Vue.http.options.root = 'http://www.liulongbin.top:3005';
+//全局设置post时候表单数据格式的组织形式 为application/x-www-form-urlencoded
+Vue.http.options.emulateJSON = true;
 
-import { Header } from 'mint-ui';
-import { Swipe, SwipeItem } from 'mint-ui';
-import { Button } from 'mint-ui';
-
-
-Vue.component(Header.name, Header);
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
+import 'mint-ui/lib/style.css'
 
 
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
+
+//图片预览插件
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview)
 
 var vm=new Vue({
     el:'#app',
