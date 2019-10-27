@@ -106,6 +106,13 @@ export default {
     },
     addToShopCar() {
       this.ballFlag = !this.ballFlag;
+      var goodsinfo={
+        id:this.id,
+        count:this.selectedCount,
+        price:this.goodsinfo.sell_price,
+        selected:true
+        };
+      this.$store.commit('addToCar',goodsinfo);
     },
     beforeEnter(el){
         el.style.transform="translate(0,0)"
@@ -129,7 +136,7 @@ export default {
     getSelectedCount(count){
         //当子组件把选中的数量传递给父组件的时候，把选中的值保存到data里
         this.selectedCount=count;
-        console.log("父组件拿到的数量值为"+this.selectedCount)
+        //console.log("父组件拿到的数量值为"+this.selectedCount)
     }
   },
   components: {

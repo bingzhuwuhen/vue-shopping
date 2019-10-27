@@ -1,7 +1,11 @@
 <template>
   <div class="app-container">
     <!-- 顶部Header区域 -->
-    <mt-header fixed title="购物App-Vue项目"></mt-header>
+    <mt-header fixed title="购物App-Vue项目">
+      <span slot="left" @click="goBack" v-show="flag">
+        <mt-button icon="back">返回</mt-button>
+      </span>
+    </mt-header>
 
     <!-- 中间的路由router-view区域 -->
     <transition>
@@ -18,13 +22,13 @@
         <span class="mui-icon mui-icon-contact"></span>
         <span class="mui-tab-label">会员</span>
       </router-link>
-      <router-link class="mui-tab-item-xzb" to="shopcar">
+      <router-link class="mui-tab-item-xzb" to="/shopcar">
         <span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-          <span class="mui-badge" id="badge">0</span>
+          <span class="mui-badge" id="badge">{{$store.getters.getAllCount}}</span>
         </span>
         <span class="mui-tab-label">购物车</span>
       </router-link>
-      <router-link class="mui-tab-item-xzb" to="search">
+      <router-link class="mui-tab-item-xzb" to="/search">
         <span class="mui-icon mui-icon-search"></span>
         <span class="mui-tab-label">搜索</span>
       </router-link>
@@ -33,7 +37,30 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      flag:false
+    }
+  },
+  created() {
+    this.flag = this.$route.path=="/home"?false:true;
+  },
+  methods: {
+    goBack(){
+      this.$router.go(-1)
+    }
+  },
+  watch:{
+    '$route.path':function(newVal){
+      if (newVal=="/home") {
+        this.flag=false;
+      }else{
+        this.flag=true;
+      }
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
